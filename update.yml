@@ -1,0 +1,14 @@
+  hosts: all
+  become: true
+
+  tasks:
+      name: Update packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+      name: Restart servers if necessary
+      reboot:
+        when: ansible_reboot_pending
+        msg: "Rebooting to complete software updates."
+
